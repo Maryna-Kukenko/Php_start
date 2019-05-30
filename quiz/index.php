@@ -21,6 +21,7 @@
   <label><input type="checkbox" name="second-question4" value="1200">1200</label>
   <p><b>3) 41.1 - 40.3 = ?</b></p>
   <select name="third-question" style="width: 150px">
+    <option></option>
     <option>0.8</option>
     <option>-0.8</option>
     <option>-0.2</option>
@@ -40,6 +41,7 @@
   <label><input type="radio" name="sixth-question" value="14/30">14/30</label>
   <p><b>7) 1 / 4 + 1 / 5 + 1 / 10 = ?</b></p>
   <select name="seventh-question" style="width: 150px">
+    <option></option>
     <option value="9/20">9/20</option>
     <option value="11/20">11/20</option>
     <option value="3/10">3/10</option>
@@ -47,6 +49,7 @@
   </select>
   <p><b>8) 123 + 456 + 789 = ?</b></p>
   <select name="eighth-question" style="width: 150px">
+    <option></option>
     <option value="1368">1368</option>
     <option value="1543">1543</option>
     <option value="1675">1675</option>
@@ -55,7 +58,7 @@
   <p><b>9) 36 / 3 x 2 / 6 = ?</b></p>
   <input type="text" name="ninth-question" placeholder="write right answer">
   <p><b>10) 25 x 20 = ?</b></p>
-  <input type="text" name="tenth-question" placeholder="write right answer"><br>
+  <input type="text" name="tenth-question" placeholder="write right answer">
   <input type="submit" value="SHOW RESULT"><br>
 </form>
 </body>
@@ -97,10 +100,12 @@ $answersForWrongQuestions = array_intersect_key($questions, $differences);
 $newArr = array_combine($answersForWrongQuestions, $differences);
 $percent = round(100 -((100*$differencesLength)/$questionsLength));
 
-echo "<h2>You result is {$percent}%</h2>";
-echo "<h2>Mistakes:</h2>";
+if (!empty($_POST)){
+  echo "<h2>You result is {$percent}%</h2>";
+  echo "<h2>Mistakes:</h2>";
 
-foreach ($newArr as $key => $value){
-  echo "<p>$key</p>";
-  echo "<p>Right answer is {$value} </p>";
+  foreach ($newArr as $key => $value){
+    echo "<p>$key</p>";
+    echo "<p><i>Right answer is {$value} </i></p>";
+  }
 }
